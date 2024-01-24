@@ -7,6 +7,7 @@
   <TranscationList :transactions="transactions"  @transactionDeleted="handleTransactionDelete" />
   <AddTransaction   @TransactionSubmitted="handleTransactionSubmitted" />
   <PieChart v-if="transactionListAvailable" :expensesArray="expensesArray" />
+  <BarChart />
 </template>
 <script setup>
 import Header from './components/Header.vue'
@@ -15,6 +16,7 @@ import IncomeExpenses from './components/IncomeExpenses.vue'
 import TranscationList from './components/TranscationList.vue'
 import AddTransaction from './components/AddTransaction.vue'
 import PieChart from './components/PieChart.vue'
+import BarChart from './components/Barchart.vue'
 import { ref, computed, onMounted } from 'vue'
 import {useToast} from 'vue-toastification'
 
@@ -61,6 +63,7 @@ const expenses = computed(()=> {
 const handleTransactionSubmitted = (transactionData) => {
   transactions.value.push({
     id: generateUniqueId(),
+    date: new Date(),
     text: transactionData.text,
     amount: transactionData.amount,
     category: transactionData.category,

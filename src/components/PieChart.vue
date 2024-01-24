@@ -7,6 +7,7 @@
 import { ref, onMounted } from 'vue';
 import * as echarts from 'echarts';
 
+
 const props = defineProps({
   expensesArray: {
     type:Array,
@@ -50,12 +51,12 @@ onMounted(() => {
   myChart.setOption(option);
 });
 
-const refreshChart = () => {
-  const myChart = echarts.init(chartDom.value);
-console.log(props.expensesArray);
-    myChart.clear();
-    myChart.setOption(option);
-}
+// const refreshChart = () => {
+//   const myChart = echarts.init(chartDom.value);
+// console.log(props.expensesArray);
+//     myChart.clear();
+//     myChart.setOption(option);
+// }
 
 </script>
 
