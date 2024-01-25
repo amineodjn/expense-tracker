@@ -8,26 +8,21 @@ import * as echarts from 'echarts';
 
 const chartDom = ref(null);
 
-const expenses = [
-  { month: 'Jan', category: 'Groceries', amount: -200 },
-  { month: 'Jan', category: 'Utilties', amount: -400 },
-  { month: 'Jan', category: 'Transportation', amount: -300 },
-  { month: 'Jan', category: 'Housing', amount: -300 },
-  { month: 'Feb', category: 'Groceries', amount: -200 },
-  { month: 'Feb', category: 'Utilties', amount: -400 },
-  { month: 'Feb', category: 'Transportation', amount: -300 },
-  { month: 'Feb', category: 'Housing', amount: -300 },
-  // ...more data for each month and category
-];
+const props = defineProps({
+  transactionsArray: {
+    type: Array,
+    required: true,
+  }
+})
 
 const grid = {
-  left: 100,
-  right: 100,
+  left: 0,
+  right: 0,
   top: 50,
   bottom: 50
 };
 
-const series = expenses.reduce((acc, expense) => {
+const series = props.transactionsArray.reduce((acc, expense) => {
   let seriesItem = acc.find(item => item.name === expense.category);
   if (!seriesItem) {
     seriesItem = {

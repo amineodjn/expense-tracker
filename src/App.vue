@@ -7,7 +7,7 @@
   <TranscationList :transactions="transactions"  @transactionDeleted="handleTransactionDelete" />
   <AddTransaction   @TransactionSubmitted="handleTransactionSubmitted" />
   <PieChart v-if="transactionListAvailable" :expensesArray="expensesArray" />
-  <BarChart />
+  <BarChart v-if="transactionsArray.length > 0" :transactionsArray="transactionsArray"/>
 </template>
 <script setup>
 import Header from './components/Header.vue'
@@ -40,7 +40,7 @@ const TotalBalance = computed(() => {
   }, 0).toFixed(2);
 });
 
-//Get Income a
+//Get Income 
 const income = computed(()=> {
   return transactions.value.
   filter(transaction => transaction.amount > 0).
@@ -113,5 +113,33 @@ const transactionListAvailable = computed(() => {
   return expensesArray.value.length > 0;
 })
 
-</script>
+//Create DATA Array for BarChart 
 
+const transactionsArray = computed(() => {
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+  const transactionsByMonthAndCategory = transactions.value
+    .filter(transaction => transaction.amount < 0 && transaction.category)
+    .map(transaction => {
+      const date = new Date(transaction.date);
+      const month = months[date.getMonth()]; // getMonth() returns a zero-based index, so we use it to get the month name from the months array
+      return {
+        month,
+        category: transaction.category,
+        amount: transaction.amount
+      };
+    });
+
+  return transactionsByMonthAndCategory.reduce((acc, transaction) => {
+    const existingTransaction = acc.find(t => t.category === transaction.category && t.month === transaction.month);
+
+    if (existingTransaction) {
+      existingTransaction.amount += transaction.amount;
+    } else {
+      acc.push({...transaction});
+    }
+
+    return acc;
+  }, []);
+});
+</script>
