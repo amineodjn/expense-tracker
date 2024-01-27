@@ -4,20 +4,19 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watchEffect } from 'vue';
 import * as echarts from 'echarts';
-
 
 const props = defineProps({
   expensesArray: {
-    type:Array,
+    type: Array,
   },
 });
 
+let chartDom = ref(null);
+let myChart = null;
 
-const chartDom = ref(null);
-
-const option = {
+const getOption = (expensesArray) => ({
   title: {
     text: 'Expense By Cateogries',
     left: 'left'
@@ -34,7 +33,7 @@ const option = {
       name: 'Your Expense',
       type: 'pie',
       radius: '50%',
-      data: props.expensesArray,
+      data: expensesArray,
       emphasis: {
         itemStyle: {
           shadowBlur: 10,
@@ -44,19 +43,21 @@ const option = {
       }
     }
   ]
-};
-
-onMounted(() => {
-  const myChart = echarts.init(chartDom.value);
-  myChart.setOption(option);
 });
 
-// const refreshChart = () => {
-//   const myChart = echarts.init(chartDom.value);
-// console.log(props.expensesArray);
-//     myChart.clear();
-//     myChart.setOption(option);
-// }
+onMounted(() => {
+  myChart = echarts.init(chartDom.value);
+  if (props.expensesArray) {
+    const option = getOption(props.expensesArray);
+    myChart.setOption(option);
+  }
+});
 
+watchEffect(() => {
+  const option = getOption(props.expensesArray);
+
+  if (myChart) {
+    myChart.setOption(option);
+  }
+});
 </script>
-

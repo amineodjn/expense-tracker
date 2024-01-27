@@ -4,7 +4,9 @@
     <Balance :TotalBalance="+TotalBalance" />
   </div>
   <IncomeExpenses :income="+income" :expenses="+expenses" />
-  <TranscationList :transactions="transactions"  @transactionDeleted="handleTransactionDelete" />
+  <TranscationList 
+    :transactions="transactions"  
+    @transactionDeleted="handleTransactionDelete" />
   <AddTransaction   @TransactionSubmitted="handleTransactionSubmitted" />
   <PieChart v-if="transactionListAvailable" :expensesArray="expensesArray" />
   <BarChart v-if="transactionsArray.length > 0" :transactionsArray="transactionsArray"/>

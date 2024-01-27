@@ -1,6 +1,6 @@
 <template>
   <h3>History</h3>
-  <div class="date-picker-wrapper">
+    <div class="date-picker-wrapper">
     <div>
       <label for="start-date">From</label>
       <label for="end-date">To</label>
@@ -10,12 +10,16 @@
       <input class="date-picker-input" id="end-date" type="date" v-model="endDate">
     </div>
   </div>
+  <Icon icon="material-symbols:autorenew" @click="unselectCategory" />
   <div class="list-wrapper">
     <ul id="list" class="list">
       <li v-for="(transaction, index) in filteredTransactions" :key="transaction.id" :class="transaction.amount < 0 ? 'minus' : 'plus'" v-show="index < 3 || showMore">
         <div>
           <span class="transaction-text">{{ transaction.text }}</span>
-          <span v-if="transaction.category != ''" class="tags">{{ transaction.category }}</span>
+          <span 
+            v-if="transaction.category != ''" 
+            class="tags"
+            @click="filterCategories(transaction.category)">{{ transaction.category }}</span>
         </div>
         <span>{{ transaction.amount }} $</span>
         <button @click="deleteTransaction(transaction.id)" class="delete-btn">x</button>
@@ -27,6 +31,7 @@
 
 <script setup>
 import { ref, computed } from 'vue';
+import { Icon } from '@iconify/vue';
 
 const showMore = ref(false);
 
@@ -47,18 +52,16 @@ const props = defineProps({
   }
 });
 
-const reversedTransactions = computed(() => [...props.transactions].reverse());
-
 const filteredTransactions = computed(() => {
   if (startDate.value && endDate.value) {
     const start = new Date(startDate.value);
     const end = new Date(endDate.value);
-    return reversedTransactions.value.filter(transaction => {
+    return filteredByCategory.value.filter(transaction => {
       const transactionDate = new Date(transaction.date);
       return transactionDate >= start && transactionDate <= end;
     });
   } else {
-    return reversedTransactions.value;
+    return filteredByCategory.value;
   }
 });
 
@@ -66,4 +69,20 @@ const emit = defineEmits(['transactionDeleted']);
 const deleteTransaction = (id) => {
   emit('transactionDeleted', id)
 }
+
+let selectedCategory = ref(null);
+const unselectCategory = () => {
+  selectedCategory.value = null;
+};
+
+const filterCategories = (category) => {
+  selectedCategory.value = category;
+};
+
+const filteredByCategory = computed(() => {
+  if (!selectedCategory.value) {
+    return props.transactions.reverse();
+  }
+  return props.transactions.filter(transaction => transaction.category === selectedCategory.value);
+});
 </script>
