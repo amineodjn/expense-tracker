@@ -269,3 +269,11 @@ input[type='date']:focus, input[type='date']:active,
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+
+/* Mobile vue */
+@media (max-width: 768px) {
+  #app {
+    width: 360px;
+    padding: 30px;
+  }
+}
