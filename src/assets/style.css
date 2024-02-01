@@ -129,6 +129,12 @@ input[type='date']:focus, input[type='date']:active,
   gap: 10px;
 }
 
+.icon-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 12px;
+}
+
 .btn {
   align-items: center;
   background: #885df1;

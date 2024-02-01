@@ -10,7 +10,9 @@
       <input class="date-picker-input" id="end-date" type="date" v-model="endDate">
     </div>
   </div>
-  <Icon icon="material-symbols:autorenew" @click="unselectCategory" />
+  <div class="icon-wrapper">
+    <Icon icon="material-symbols:autorenew" @click="unselectCategory" />
+  </div>
   <div class="list-wrapper">
     <ul id="list" class="list">
       <li v-for="(transaction, index) in filteredTransactions" :key="transaction.id" :class="transaction.amount < 0 ? 'minus' : 'plus'" v-show="index < 3 || showMore">
