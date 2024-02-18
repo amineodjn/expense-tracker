@@ -4,15 +4,8 @@
     <div class="form-control">
       <label for="category">Category</label><br />
       <select class="form-selectBox" id="category" v-model="category"  @change="handleCategoryChange">
-        <option value="Housing">Housing</option>
-        <option value="Transportation">Transportation</option>
-        <option value="Taxes">Taxes</option>
-        <option value="Food">Food</option>
-        <option value="Child Expenses">Child Expenses</option>
-        <option value="Health Care">Health Care</option>
-        <option value="Insurance">Insurance</option>
-        <option value="Utilities">Utilities</option>
-        <option value="Custom" >Add a new category</option>
+        <option v-for="cat in categories" :value="cat" :key="cat">{{ cat }}</option>
+
       </select>
       <input v-if="customSelected" type="text" id="Custom" v-model="category" placeholder="Enter custom category..." />
     </div>
@@ -24,7 +17,9 @@
       <label for="amount">Amount</label>
       <input type="text" id="amount" v-model="amount" placeholder="Enter amount...eg (-10, 15)" />
     </div> 
-    <button class="btn">Add transaction</button>
+    <div class="btn-wrapper">
+      <button class="btn">Add transaction</button>
+    </div>
   </form>
 </template>
 <script setup>
@@ -34,6 +29,7 @@ import {useToast} from 'vue-toastification'
 const text = ref('');
 const amount = ref('');
 const category = ref('');
+const categories = ref(['Income','Housing', 'Transportation', 'Taxes', 'Food', 'Child Expenses', 'Health Care', 'Insurance', 'Utilities', 'Custom']);
 const customSelected = ref(false);
 
 

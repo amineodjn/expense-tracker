@@ -24,10 +24,6 @@ const getOption = (expensesArray) => ({
   tooltip: {
     trigger: 'item'
   },
-  legend: {
-    orient: 'vertical',
-    left: 'right'
-  },
   series: [
     {
       name: 'Your Expense',

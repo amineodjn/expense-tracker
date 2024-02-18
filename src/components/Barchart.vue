@@ -17,9 +17,9 @@ const props = defineProps({
 })
 
 const grid = {
-  left: 0,
+  left: 50,
   right: 0,
-  top: 50,
+  top: 100,
   bottom: 50
 };
 
@@ -56,7 +56,7 @@ const getOption = (transactionsArray) => {
       type: 'category',
       data: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
     },
-    series
+    series,
   };
 };
 

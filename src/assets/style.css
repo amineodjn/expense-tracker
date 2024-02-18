@@ -18,6 +18,13 @@ body {
   margin: 0;
   font-family: 'Lato', sans-serif;
   font-size: 18px;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+#app {
+  max-width: 100%;
+  overflow-x: hidden;
+  margin: 8px;
 }
 
 .container {
@@ -93,19 +100,29 @@ a:hover {
 
 label {
   display: inline-block;
-  margin: 10px 0;
+  margin: 10px 10px;
 }
 
 input[type='text'],
-input[type='number'], input[type='date']  {
+input[type='number']  {
   border: 1px solid #757e8b; 
   border-radius: 6px; 
   display: block;
   font-size: 16px;
   height: 34px; 
-  margin: 0 0 8px; 
+  margin: 0 8px 8px; 
   padding: 4px 8px; 
-  width: 100%;
+  width: 95%;
+}
+
+input[type='date'] {
+  border: 1px solid #757e8b; 
+  border-radius: 6px; 
+  display: block;
+  font-size: 16px;
+  height: 34px; 
+  margin: 0 8px 8px; 
+  padding: 4px 8px; 
 }
 
 input[type='text']:focus, input[type='text']:active,
@@ -135,6 +152,11 @@ input[type='date']:focus, input[type='date']:active,
   padding-right: 12px;
 }
 
+.btn-wrapper {
+  justify-content: center;
+  display: flex;
+}
+
 .btn {
   align-items: center;
   background: #885df1;
@@ -152,8 +174,8 @@ input[type='date']:focus, input[type='date']:active,
   padding: 4px 12px;
   position: relative;
   text-align: center;
-  width: 100%; 
-  margin: 10px 0 30px;
+  width: 70%; 
+  margin: 20px 0 30px;
   transition: background 200ms ease, border-color 200ms ease;
 }
 
@@ -170,7 +192,7 @@ input[type='date']:focus, input[type='date']:active,
 .list {
   list-style-type: none;
   padding: 0;
-  width: 100%;
+  width: 90%;
 }
 
 .list li {
@@ -248,7 +270,6 @@ input[type='date']:focus, input[type='date']:active,
 
 
 .form-selectBox {
-
     border: 1px solid #757e8b;
     border-radius: 4px;
     box-sizing: border-box;
@@ -256,9 +277,9 @@ input[type='date']:focus, input[type='date']:active,
     font-size: .875rem;
     font-weight: 400;
     height: 34px;
-    margin: 0 0 8px;
+    margin: 0 8px 8px;
     padding: 4px 8px;
-    width: 300px;
+    width: 95%;
     appearance: none;
     background: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgMjAgMjAiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDIwIDIwOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+PHN0eWxlIHR5cGU9InRleHQvY3NzIj4uc3Qwe2ZpbGw6IzNCNTZENjt9PC9zdHlsZT48cGF0aCBjbGFzcz0ic3QwIiBkPSJNMTYuNyw3LjNjLTAuNC0wLjQtMS0wLjQtMS40LDBjMCwwLDAsMCwwLDBMMTAsMTIuNkw0LjcsNy4zYy0wLjQtMC40LTEtMC40LTEuNCwwcy0wLjQsMSwwLDEuNGw2LDZjMC40LDAuNCwxLDAuNCwxLjQsMGMwLDAsMCwwLDAsMGw2LTZDMTcuMSw4LjQsMTcuMSw3LjcsMTYuNyw3LjNDMTYuNyw3LjMsMTYuNyw3LjMsMTYuNyw3LjN6Ii8+PC9zdmc+") no-repeat right 8px center #fff;
     background-size: 16px 16px;
